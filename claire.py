@@ -39,9 +39,8 @@ def takeCommand():
         try:
             print("Recognizing")
               
-            # for Listening the command in indian
-            # english we can also use 'hi-In' 
-            # for hindi recognizing
+            # for Listening the command in english
+            # english we can also use 'en-US' 
             Query = r.recognize_google(audio, language='en-US')
             print("the command is printed=", Query)
               
@@ -60,7 +59,7 @@ def speak(audio):
     voices = engine.getProperty('voices')
       
     # setter method .[0]=male voice and 
-    # [1]=female voice in set Property.
+    # [33]=female voice in set Property on mac
     engine.setProperty('voice', voices[33].id)
       
     # Method for the speaking of the the assistant
