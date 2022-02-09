@@ -176,7 +176,7 @@ def Take_query():
                 # wikipedia we can increase and decrease 
                 # it also.
                 try:
-                    result = wikipedia.summary(query, sentences=3)
+                    result = wikipedia.summary(query, sentences=1)
                     print(result)
                     speak("According to wikipedia")
                     speak(result)
@@ -208,10 +208,10 @@ def Take_query():
                     speak(f"Sorry sir I didn't get that. {e}")
 
             # Open an app
-            elif "open the app" in query or "open app" in query:
+            elif "open the app" in query:
                 try:
                     query = query.split()
-                    app = query[-1]
+                    app = " ".join(query[4:])
                     os.system(f"open -a {app}")
                     if is_runnning(app):
                         speak(f"Successfully opened {app}")
@@ -222,15 +222,15 @@ def Take_query():
                     speak(f"Sorry sir, I was unable to open tha application for you. {e}")
   
             # Close an app
-            elif "close the app" in query or "close app" in query:
+            elif "close the app" in query:
                 try:
                     query = query.split()
-                    app = query[-1]
+                    app = " ".join(query[4:])
                     os.system(f"osascript -e 'quit app \"{app}\"'")
-                    if is_runnning(app) == False:
-                        speak(f"Successfully closed {app}")
-                    else:
+                    if is_runnning(app):
                         speak(f"I was unsuccessful in closing the {app}")
+                    else:
+                        speak(f"Successfully closed {app}")
                 except Exception as e:
                     print(e)
                     speak(f"Sorry sir, I was unable to close tha application for you. {e}")
