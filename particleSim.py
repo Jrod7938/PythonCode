@@ -2,7 +2,7 @@ import pygame
 import random
 import math
 
-HEIGHT, WIDTH = 800, 800
+HEIGHT, WIDTH = 250, 250
 pygame.init()
 
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -13,6 +13,8 @@ WHITE = (255, 255, 255)
 YELLOW = (255, 255, 0)
 GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
+
+FRICTION = 0.70
 
 particles = []
 
@@ -61,7 +63,10 @@ def rule(particles1, particles2, g):
 
                     a.x_vel += fx
                     a.y_vel += fy
-
+                    
+        a.x_vel *= FRICTION
+        a.y_vel *= FRICTION
+        
         a.x += a.x_vel
         a.y += a.y_vel
 
@@ -81,10 +86,10 @@ def rule(particles1, particles2, g):
 def main():
     clock = pygame.time.Clock()
 
-    yellow = create(5, YELLOW)
-    green = create(5, GREEN)
-    blue = create(5, BLUE)
-    white = create(5, WHITE)
+    yellow = create(80, YELLOW)
+    green = create(80, GREEN)
+    blue = create(80, BLUE)
+    white = create(80, WHITE)
 
     run = True
     while run:
@@ -92,24 +97,25 @@ def main():
         WIN.fill(BACKGROUND)
 
         rule(yellow, yellow, -1)
+        rule(yellow, blue, -1)
         rule(yellow, white, 1)
         rule(yellow, green, 1)
-        rule(yellow, blue, 1)
+        
         
         rule(green, green, -1)
         rule(green, white, 1)
-        rule(green, yellow, 1)
+        rule(green, yellow, -1)
         rule(green, blue, 1)
         
         rule(blue, blue, -1)
         rule(blue, white, -1)
-        rule(blue, green, -1)
-        rule(blue, yellow, -1)
+        rule(blue, green, 1)
+        rule(blue, yellow, 1)
         
         rule(white, white, -1)
-        rule(white, yellow, -1)
+        rule(white, yellow, 1)
         rule(white, green, -1)
-        rule(white, blue, -1)
+        rule(white, blue, 1)
         
         
 
