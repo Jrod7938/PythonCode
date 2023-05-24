@@ -83,13 +83,14 @@ def rule(particles1, particles2, g):
             a.y_vel *= -1
             a.y = HEIGHT // 2
 
-def main():
+def main(seed):
+    random.seed(seed)
     clock = pygame.time.Clock()
 
-    yellow = create(80, YELLOW)
-    green = create(80, GREEN)
-    blue = create(80, BLUE)
-    white = create(80, WHITE)
+    yellow = create(100, YELLOW)
+    green = create(100, GREEN)
+    blue = create(100, BLUE)
+    white = create(100, WHITE)
 
     run = True
     while run:
@@ -131,4 +132,4 @@ def main():
     
     pygame.quit()
 
-main()
+main(1)
