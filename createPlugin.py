@@ -1,9 +1,5 @@
 import os
 
-# Define the Libraries class with the necessary constant values
-class Libraries:
-    pf4j = "org.pf4j:pf4j:3.7.0"
-
 def createPlugin():
     default_dir = "/Users/jancarlosrodriguez/Documents/Code/Kotlin/dc-plugins"
 
