@@ -27,8 +27,10 @@ def read_pdf(name, start_page=0, end_page=None):
     
     # save output with pdf name and page range
     pdf_name = name.replace(".pdf", "")
+    print(f"Saving output as {pdf_name}P{start_page + 1}toP{end_page}.mp3")
     output_name = f"{pdf_name}P{start_page + 1}toP{end_page}.mp3"
     tts.save(output_name)
+    print("Done!")
 
 
 # main function
