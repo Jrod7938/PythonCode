@@ -25,9 +25,11 @@ def read_pdf(name, start_page=0, end_page=None):
     # reading the text
     tts = gTTS(text=text, lang='en')
     
-    # save output with pdf name
-    output_name = name.replace(".pdf", ".mp3")
+    # save output with pdf name and page range
+    pdf_name = name.replace(".pdf", "")
+    output_name = f"{pdf_name}P{start_page + 1}toP{end_page}.mp3"
     tts.save(output_name)
+
 
 # main function
 def main():
