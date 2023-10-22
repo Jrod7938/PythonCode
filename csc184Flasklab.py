@@ -7,7 +7,7 @@ data = pd.read_csv('AAPL.csv', parse_dates=['Date'], index_col='Date')
 
 @app.route('/')
 def home():
-    return " CSC184 Lab 2: Jancarlos Rodriguez"
+    return jsonify("CSC184 Lab 2: Jancarlos Rodriguez") 
 
 @app.route('/getData', methods=['GET'])
 def get_data():
@@ -21,10 +21,17 @@ def get_data_date(date):
     except KeyError:
         return jsonify(error='Date not found'), 404
 
-@app.route('/calculate10DayAverage', methods=['GET'])
-def calculate_10_day_average():
-    last_10_days_avg = data.last('10D').mean()
-    return last_10_days_avg.to_json()
+@app.route('/calculate10DayAverage/<string:date>', methods=['GET'])
+def calculate_10_day_average(date):
+    try:
+        end_date = pd.to_datetime(date)
+        start_date = end_date - pd.DateOffset(days=10)
+        data_range = data.loc[start_date:end_date]
+        last_10_days_avg = data_range['Close'].mean()
+        return jsonify({"10_day_avg_close": last_10_days_avg})
+    except KeyError:
+        return jsonify(error='Date not found'), 404
+    
 
 @app.route('/getData', methods=['POST'])
 def get_data_range():
